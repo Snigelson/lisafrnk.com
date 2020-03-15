@@ -21,9 +21,18 @@ extern int get_key(void);
 value [ ax ]			\
 modify [ bx ];
 
+/* Put one character on screen */
+extern void eputc(char c);
+#pragma aux eputc =		\
+	"mov ah, 06h"		\
+	"int 21h"			\
+parm [ dl ]				\
+modify [ ax ];
+
 void eputs(const char* str)
 {
 	while(*str) {
+		eputc(*str);
 		str++;
 	};
 }
@@ -55,8 +64,7 @@ int main() {
 	music_pause();
 	reset_display();
 
-/*	puts ("average_snail - March 2020");*/
-/*	puts ("May the corona be merciful.");*/
+	eputs ("Snigelson March 2020");
 
 	return 0;
 }
