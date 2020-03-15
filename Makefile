@@ -1,7 +1,8 @@
-all: main.com
+all: lisafrnk.com
 
-main.com: main.obj graphics.obj bmpdata.obj music.obj
+lisafrnk.com: main.obj graphics.obj bmpdata.obj music.obj
 	wcl -s -zls -0 -q -mt -oi -bcl=com main.obj graphics.obj bmpdata.obj music.obj @map
+	@ren main.com lisafrnk.com
 
 music.obj:
 	wcl -s -zls -0 -q -mt -oi -bcl=com -c music.c
