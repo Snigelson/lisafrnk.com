@@ -33,7 +33,7 @@ void do_lines(const unsigned char* src, unsigned char far* dst)
 			}
 		} while (--x);
 		dst += MARGIN*2;
-		wait_vsync_safe();
+		wait_vsync();
 	} while (--y);
 }
 

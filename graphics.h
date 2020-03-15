@@ -21,23 +21,7 @@ extern void wait_vsync(void);
 	"in al, dx"			\
 	"test al, 0x08"		\
 	"jne l1"			\
-;
-
-/* Like above but pushes DX */
-extern void wait_vsync_safe(void);
-#pragma aux wait_vsync_safe =	\
-	"push dx"			\
-"l0:"					\
-	"mov dx,0x3da"		\
-	"in al, dx"			\
-	"test al, 0x08"		\
-	"je l0"				\
-"l1:"					\
-	"in al, dx"			\
-	"test al, 0x08"		\
-	"jne l1"			\
-	"pop dx"			\
-;
+modify [ al dx ];
 
 void draw_bmp();
 
