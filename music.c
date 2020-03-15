@@ -1,12 +1,7 @@
-/* Replace most header files with own size-optimized implementations? */
 #include <stdint.h>
 #include <stdlib.h>
 #include <conio.h>
 
-/* Use google to find out how to use intrinsic versions of inp, outp, interrupt, etc.
- * Maybe roll out own versions since the intrinsic versions handle low addresses inefficiently. */
-
-/* TODO: Optimize setfreq */
 #define speaker_setup() \
   outp( 0x43, 0xB6 )
 #define speaker_mute() \
@@ -104,13 +99,6 @@ static unsigned int notes[] = {
 
 Each byte in arpeggio pattern defines an offset from the base note. Pattern ends with ARPPAT_END
 
-Other effects (tt = 11):
-
-| 11nnnnnn | description                            | Third byte
-+----------+----------------------------------------+---------------
-|   000000 | Noise - simply randomize note          |
-|          | each frame                             |
-
 */
 
 #define TRACK_END NULL
@@ -130,75 +118,69 @@ Other effects (tt = 11):
 
 /* Start track 0 */
 
-#define PAUSE SILENCE
-
 /* QNL=40 sounds good in Dosbox, but is too slow on real CGA. I have a
  * PAL/NTSC type hunch, because 33 sounds pretty good on my PC... */
-#define QNL 40
+#define QNL 32
 #define ENL (QNL/2)
 #define HNL (QNL*2)
 
-/* ARPEGGIO|BASE, LEN, ARP(PATTERN, NOTE DURATION) */
-
 static const unsigned char pattern0[] = {
 	NOTE|34, QNL+ENL-1,
-/*	ARPEGGIO|(34-19), QNL, ARP(0, 1),
-	NOTE|34, ENL-1,*/
 
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	NOTE|41, ENL+QNL+ENL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 
 	NOTE|41, ENL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	NOTE|39, ENL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	NOTE|37, ENL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	NOTE|36, ENL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	NOTE|36, ENL+QNL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 
 	PATTERN_END
 };
 
 static const unsigned char pattern1[] = {
 	NOTE|37, ENL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	NOTE|34, ENL+HNL+QNL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 
 	NOTE|46, ENL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	NOTE|44, ENL+HNL+QNL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 
 	NOTE|34, ENL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	NOTE|37, ENL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 
 	PATTERN_END
 };
 
 static const char pattern2[] = {
 	NOTE|34, ENL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	NOTE|41, ENL+HNL-1,
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 
-	NOTE|PAUSE, ENL,
+	NOTE|SILENCE, ENL,
 	ARPEGGIO|34-12, ENL-1, ARP(1,1),
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	ARPEGGIO|34-12, ENL, ARP(1,1),
 
-	NOTE|PAUSE, ENL,
+	NOTE|SILENCE, ENL,
 	ARPEGGIO|34-12, ENL-1, ARP(2,1),
-	NOTE|PAUSE, 1,
+	NOTE|SILENCE, 1,
 	ARPEGGIO|34-12, ENL, ARP(2,1),
 
-	NOTE|PAUSE, QNL,
+	NOTE|SILENCE, QNL,
 
 	PATTERN_END
 };

@@ -4,7 +4,6 @@
 
 #define CGA_EVEN_BASE (0xB8000000L)
 #define CGA_ODD_BASE (0xB8002000L)
-/* #include <dos.h> */
 
 #define WIDTH (200/4)
 #define MARGIN (((320/4)-WIDTH)/2)
