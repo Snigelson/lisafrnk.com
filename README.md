@@ -1,6 +1,6 @@
 ## `LISAFRNK.COM`
 
-Shows an ＡＥＳＴＨＥＴＩＣimage and plays a soothing tune.
+Shows an ＡＥＳＴＨＥＴＩＣ image and plays a soothing tune.
 
 ### Build requirements
 
@@ -18,6 +18,10 @@ This program should run on anything. And by anything, I mean any PC or
 PC Compatible with CGA graphics. Since the binary is under 8&nbsp;kB
 in size, it should be able to run on the lowliest of these,
 the 16&nbsp;kB IBM PC (if a CGA card is installed, of course).
+
+When running in Dosbox, the music seems to run too fast. The music is
+synchronized to the frame rate, so maybe my Dosbox just doesn't run at
+60 Hz. Future me will test this.
 
 ### Modifying stuff
 
