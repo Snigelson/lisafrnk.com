@@ -2,6 +2,8 @@
 
 Shows an ＡＥＳＴＨＥＴＩＣ image and plays a soothing tune.
 
+Demo: https://www.youtube.com/watch?v=whH76m4ecGA
+
 ### Build requirements
 
 Watcom. Only tested with verstion 1.9.
